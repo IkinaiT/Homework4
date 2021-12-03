@@ -9,6 +9,9 @@ namespace Homework4
             int width, height, arrLength;
             bool correctW, correctH, correctInput;
             Random rand = new Random();
+
+            //Part 1
+
             do
             {
                 Console.WriteLine("Введите ширину, а затем высоту массива: ");
@@ -37,6 +40,9 @@ namespace Homework4
                 if (!correctInput)
                     Console.WriteLine("Некорректный ввод!\n\n");
             } while (!correctInput);
+
+            //Part 2
+
             int[] userArr = new int[arrLength];
             int minVar = 0;
             
@@ -62,7 +68,52 @@ namespace Homework4
                 i++;
             }
 
-            Console.Write($"Минимальное число: {minVar}");
+            Console.Write($"Минимальное число: {minVar}\n\n\n");
+
+            //Part 3
+
+            int maxValue = 0;
+
+
+            do
+            {
+                Console.Write("Введите максимальное число: ");
+                correctInput = int.TryParse(Console.ReadLine(), out maxValue);
+                if (!correctInput)
+                    Console.WriteLine("Некорректный ввод!\n\n");
+            } while (!correctInput);
+
+            int randomNum = rand.Next(maxValue);
+            Console.Write($"Попробуйте угадать! Загаданое число 0 - {maxValue}: ");
+            while (true)
+            {
+                string userTrySTR = Console.ReadLine();
+                int userTry;
+                correctInput = int.TryParse(userTrySTR, out userTry);
+                if (userTrySTR == "")
+                    break;
+
+                if (!correctInput)
+                {
+                    Console.WriteLine("Неверный ввод, повторите попытку");
+                }
+                else
+                {
+                    if(userTry < randomNum)
+                    {
+                        Console.Write("Загаданое число больше, попробуйте еще раз: ");
+                    }
+                    else if (userTry > randomNum)
+                    {
+                        Console.Write("Загаданое число меньше, попробуйте еще раз: ");
+                    }
+                    else
+                    {
+                        Console.Write("Поздравляем! Вы победили!");
+                        break;
+                    }
+                }
+            }
             Console.ReadKey();
         }
     }
